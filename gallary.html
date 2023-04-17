@@ -1,0 +1,104 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+
+<div id="gallary" class="bg-1" style="background-color: black;">
+    <div class="container">
+      <hr>
+      <h3 class="text-center" style="color:rgb(64, 217, 244);"><b>PET_GALLARY</b></h3>
+      <p class="text-center">“Pets are humanizing. They remind us we have an obligation and responsibility to preserve and nurture and care for all life.”</p>
+      <hr>
+      <br>
+  
+      <div class="row">
+        {%for pet in pet%}
+        <center>
+        <div class="col-sm-6">
+          <div class="panel" style="width:300px">
+            
+            <div class="panel-heading" style="background-color:rgb(38, 38, 87);"><center>{{pet.pname}}</center></div>
+            <div class="panel-body" style="background-color:black;"><center><img src="{{pet.image.url}}" class="img-circle" alt="Cinque Terre" width="200" height="200"></center></div>
+            <div class="panel-footer" style="background-color:rgb(38, 38, 87);"><center><a href='/viewsSection/{{pet.id}}'><button type="button" style="background-color:yellow ;">{{pet.section}}</button></a></center></div>
+           
+          </div>
+          <br>
+        </div>
+      </center>
+        {%endfor%}
+      </div> 
+    </div>
+  </div>
+
+  <form role="form" method="post" action="/login">
+    {%csrf_token%}
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" id="img1">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4><span class="glyphicon glyphicon-log-in"></span> Sign In</h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="psw"><span class="glyphicon glyphicon-user"></span> Username</label>
+                  <input type="text" class="form-control"  name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+                </div><br>
+                  <button type="submit" class="btn btn-block" name="action" value="login">Login
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>         
+            </div>       
+          </div>
+      
+    </div>
+   
+  </div>
+</form> 
+<form role="form" method="post" action="/signup">
+    {%csrf_token%}
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" id="img1">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4><span class="glyphicon glyphicon-log-in"></span> Sign Up</h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="psw"><span class="glyphicon glyphicon-user"></span> First Name</label>
+                  <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Last Name</label>
+                  <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-phone"></span> Mobile No.</label>
+                  <input type="number" class="form-control" name="mob" placeholder="Mobile" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-user"></span>Create Username</label>
+                  <input type="text" class="form-control" name="user" placeholder="Create Username" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-lock"></span>Create Password</label>
+                  <input type="password" class="form-control" name="pwd" placeholder="Create Password" required>
+                </div>
+                  <button type="submit" class="btn btn-block" name="action" value="signup">Sign Up
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>         
+            </div>       
+          </div>
+      
+    </div>
+   
+  </div>
+</form>
+{%endblock%}

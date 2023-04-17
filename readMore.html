@@ -1,0 +1,315 @@
+{%extends "homepage.html"%}
+
+
+{%block content%}
+<style>
+	@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap");
+	*
+	{
+		margin: 0;
+		padding: 0;
+		font-family: 'Roboto',sans-serif;
+	}
+
+
+	 .percent
+	{
+		position: relative;
+		width: 150px;
+		height: 150px;
+	}
+
+	 .percent svg circle
+	{
+		width: 150px;
+		height: 150px;
+		fill: none;
+		stroke-width: 10;
+		stroke: #000;
+		transform: translate(5px,5px);
+		stroke-dasharray: 440;
+		stroke-dashoffset: 440;
+		stroke-linecap: round;
+	}
+	 .percent svg circle:nth-child(1)
+	{
+		stroke-dashoffset: 0;
+		stroke: #f3f3f3;
+	}
+	 .percent svg circle:nth-child(2)
+	{   --document:100;
+		stroke-dashoffset: calc(420 - (420 * var(--document)) /100);
+		stroke: #03a9f4;
+	}
+	 .percent .number
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #111;
+	}
+
+
+
+	 .percent1
+	{
+		position: relative;
+		width: 150px;
+		height: 150px;
+	}
+
+	 .percent1 svg circle
+	{
+		width: 150px;
+		height: 150px;
+		fill: none;
+		stroke-width: 10;
+		stroke: #000;
+		transform: translate(5px,5px);
+		stroke-dasharray: 440;
+		stroke-dashoffset: 440;
+		stroke-linecap: round;
+	}
+	 .percent1 svg circle:nth-child(1)
+	{
+		stroke-dashoffset: 0;
+		stroke: rgb(27, 23, 23);
+	}
+	 .percent1 svg circle:nth-child(2)
+	{   --document:90;
+		stroke-dashoffset: calc(420 - (420 * var(--document)) /100);
+		stroke: green;
+	}
+	 .percent1 .number1
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #111;
+	}
+
+
+
+</style>
+<br>
+<hr>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+
+    <center><h1 style="color: white;">{{animl.category}} :</h1></center>
+    <hr>
+    
+        <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        
+        </ol>
+
+        <!-- Wrapper for slides -->
+   
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="{{animl.front.url}}" alt="New York" width="500" height="500">      
+            </div>
+
+        
+            <div class="item ">
+                <img src="{{animl.side.url}}" alt="New York" width="500" height="500">      
+            </div>
+        </div>
+        
+    
+<hr>
+
+</div>
+<center><strong style="font-size:x-large; color: cadetblue;">!!..DESCRIPTION..!!</strong></center>
+<center><p style=" color: white;"> {{animl.description}}</p></center>
+<hr>
+        
+<form method="post" action="/addTocart">
+  {%csrf_token%}
+
+<table class="table" style="background-color:whitesmoke; color: black;">
+    <tr >
+       
+        <td>
+            NAME :
+        </td>
+        
+        <td>
+
+             {{animl.category}}
+        </td>
+       
+    </tr>
+    <tr >       
+        <td>
+            PRICE :
+        </td>        
+        <td>
+             {{animl.price}}
+        </td>      
+    </tr>
+    <tr >       
+        <td>
+            LIFE-SPAN :
+        </td>        
+        <td>
+             {{animl.lifespan}}
+        </td>      
+    </tr>
+    <tr >       
+        <td>
+            HEIGHT :
+        </td>        
+        <td>
+             {{animl.height}}
+        </td> 
+    </tr>
+    <tr> 
+        <td>
+            WEIGHT :
+       </td> 
+
+       <td>
+            {{animl.weight}}
+        </td>    
+    </tr>
+    <tr> 
+        <td><br><br><br>GRAPH  :</td>
+        <td>
+           
+            <div class="box">
+                <div class="percent">
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div class="number">
+                       <h2>100<span>%</span></h2>
+                    </div>
+                </div>
+            </div><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Trainable<br>
+            
+       </td> 
+
+       <td>
+        
+        <div class="box1">
+            <div class="percent1">
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70"></circle>
+                </svg>
+                <div class="number1">
+                   <h2>90<span>%</span></h2>
+                </div>
+            </div>
+        </div><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exercise<br>
+        <br><br>
+        
+        </td>  
+        
+        <td>
+          <br><br><br><br><br><br>
+          <br><br><br><br><br><br><br>
+          <button type="submit" class="btn btn-success" style="width:250px ;">ADD TO CART </button>
+          <input type="hidden" name="petid" value="{{animl.id}}">
+        </td>
+    </tr>
+
+ 
+  </form>    
+</table>
+
+
+
+
+
+<form role="form" method="post" action="/login">
+    {%csrf_token%}
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" id="img1">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4><span class="glyphicon glyphicon-log-in"></span> Sign In</h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="psw"><span class="glyphicon glyphicon-user"></span> Username</label>
+                  <input type="text" class="form-control"  name="username" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-lock"></span> Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+                </div><br>
+                  <button type="submit" class="btn btn-block" name="action" value="login">Login
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>         
+            </div>       
+          </div>
+      
+    </div>
+   
+  </div>
+</form> 
+<form role="form" method="post" action="/signup">
+    {%csrf_token%}
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" id="img1">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4><span class="glyphicon glyphicon-log-in"></span> Sign Up</h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="form-group">
+                  <label for="psw"><span class="glyphicon glyphicon-user"></span> First Name</label>
+                  <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-user"></span> Last Name</label>
+                  <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-phone"></span> Mobile No.</label>
+                  <input type="number" class="form-control" name="mob" placeholder="Mobile" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-user"></span>Create Username</label>
+                  <input type="text" class="form-control" name="user" placeholder="Create Username" required>
+                </div>
+                <div class="form-group">
+                  <label for="usrname"><span class="glyphicon glyphicon-lock"></span>Create Password</label>
+                  <input type="password" class="form-control" name="pwd" placeholder="Create Password" required>
+                </div>
+                  <button type="submit" class="btn btn-block" name="action" value="signup">Sign Up
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>         
+            </div>       
+          </div>
+      
+    </div>
+   
+  </div>
+</form>
+
+
+{%endblock%}

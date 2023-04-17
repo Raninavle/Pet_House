@@ -1,0 +1,52 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+<center>
+    <h1 style="color:brown ">PAYMENT SECTION</h1>
+    <br>
+    {%if alert%}
+        <strong style="color:rgb(251, 125, 125)">{{alert}}</strong>
+    
+    {%endif%}
+    <br><br>
+    <form method="POST">
+        {%csrf_token%}
+
+        <table class="table" style="color:black">
+            <tr>
+                <td>Enter Card Number</td>
+                <td>
+                    <input type="text" name="cardno" class="form-control" required>
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter CVV</td>
+                <td> 
+                    <input type="text" name="cvv" class="form-control" required>
+                </td>
+
+            </tr>
+            <tr> 
+                <td>Enter Expiry</td>
+                <td>
+                    <input type="text" name="expiry" class="form-control" size="4" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Total Amount</td>
+                <td>
+                    {{request.session.total}}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit" class="btn btn-success">MAKE PAYMENT</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
+{%endblock%}

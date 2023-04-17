@@ -1,0 +1,63 @@
+.container{
+    background-color: cadetblue;
+
+}
+.rating{
+    position:  absolute;
+    left: 50%;
+    transform: translate(-50%, -40%) rotateY(180deg);
+    display: flex;
+}
+    
+.rating input{
+    display: none;
+}
+
+.rating label{
+    display:  block;
+    cursor: pointer;
+    width: 50px;
+}
+
+.rating label:before{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 35px;
+    color: black;
+}
+
+.rating label:after{
+    content: '\f005';
+    font-family: fontAwesome;
+    position: absolute;
+    display: block;
+    font-size: 35px;
+    color: gold;
+    top: 0;
+    opacity: 0;
+    transition: .5s;
+    text-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after
+{
+    opacity: 1;
+}
+
+.pink-textarea textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink-textarea.md-form label.active {
+    color: #f48fb1;
+}
+.active-pink-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color: #f48fb1;
+}
+
+

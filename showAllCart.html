@@ -1,0 +1,101 @@
+{%extends "homepage.html"%}
+
+{%block content%}
+<script type="text/javascript">
+  function getconfirm(myid)
+  {
+    result= confirm("are you sure?? you want to delete")
+    if(result)
+    {
+      myform = document.getElementById(myid);
+      myform.action ="/remove"
+      myform.submit()
+    }
+  }
+</script>
+
+<center>
+  <h1 style="color:brown ">YOUR CART</h1>
+  <br>
+  {%if item %}
+  <strong style="color:black;"> </strong>
+  {%else%}
+  <strong style="color:rgb(250, 250, 125);"> !!..CART IS EMPTY..!!</strong>
+  {%endif%}
+  {%if messages%}
+  {%for message in messages%}
+      <strong style="color:rgb(251, 125, 125)">{{message}}</strong>
+  
+  {%endfor%}
+  {%endif%}
+  <br><br>
+
+  <table class="table" style="background-color: rgb(38, 38, 87); color: white;">
+    <tr>
+      <th>Pet Name</th>
+      <th></th>
+      <th>Pet Price</th>
+      <th></th>
+      <th>Pet Life-Span</th>
+      <th>Pet Weight</th>
+
+    </tr>
+
+    {%for item in item%}
+    <form method="post" id="myform{{item.pet.id}}">
+      {%csrf_token%}
+    
+    <tr>
+      <td>{{item.pet.category}}</td>
+      <td></td>
+      <td>{{item.pet.price}}</td>
+      <td></td>
+      <td>{{item.pet.lifespan}}</td>
+      <td>{{item.pet.weight}}</td>
+      <td><button type="button" class="btn btn-link" onclick="getconfirm('myform{{item.pet.id}}')">Remove</button> </td>
+    </tr>
+    <input type="hidden" name="petid" value="{{item.pet.id}}">
+  </form>
+    {%endfor%}
+  </table>
+  <hr>
+  {%if item %}
+  <h3 style="color:white">TOTAL: {{request.session.total}}</h3><a href="/MakePayment" class="btn btn-success" style="background-color:green; position:right;" >Payment & Get License</a>
+  {%else%}
+  <h3 style="color:white">TOTAL: {{request.session.total}}</h3><a href="" class="btn btn-success" style="background-color:green; position:right;" >Payment & Get License</a>
+  {%endif%}
+    <br><br>
+    <div class="dropdown" >  
+      <button type="button" 
+         class="btn btn-link dropdown-toggle"
+       data-toggle="dropdown" style="background-color: black ; color: skyblue;">
+        View History
+      </button>
+      <div class="dropdown-menu" style="width: 100%; height: 100%; background-color:black ; ">
+        <table class="table" style="background-color: rgb(38, 38, 87); color: white;">
+          
+          <tr>
+            <th>Pet Name</th>
+            <th></th>
+            <th>Pet Price</th>
+            <th></th>
+            <th>Date and Time</th>
+            <th>Status</th>
+          </tr>
+          {%for history in history%}
+          <tr>
+            <td>{{history.details}}</td>
+            <td></td>
+            <td>{{history.amount}}</td>
+            <td></td>
+            <td>{{history.dateoforder}}</td>
+            <td>Completed</td>
+            <td> </td>
+          </tr>
+          {%endfor%}
+        </table>        
+      </div>
+    </div>
+</center>
+<br>
+{%endblock%}
